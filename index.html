@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Autark Prospecção: ICP, script de abordagem, acompanhamento e plano de crescimento.">
+<title>Dossiê Autark Prospecção</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400..800&display=swap">
+<style>
+/* Layout: caderneta de campo do Autark Prospecção. Abre com a maquete 3D da base real ao lado da tese; depois, folhas com uma ideia cada.
+   Mesma identidade do sistema: papel quente, tinta escura, um único acento verde-mangue; claro por padrão, escuro acompanha o aparelho. */
+:root {
+  --papel: #f5f2ea;
+  --superficie: #fffdf8;
+  --recuo: #ebe7db;
+  --tinta: #17201c;
+  --tinta-2: #4d5852;
+  --linha: #d9d3c4;
+  --linha-forte: #b4ad9b;
+  --acento: #0f5c4a;
+  --acento-forte: #0a4537;
+  --sobre-acento: #f7f5ee;
+  --acento-suave: #d9eae2;
+  --ambar: #b97a12;
+  --ambar-fundo: #f3e2bb;
+  --ambar-texto: #5f4100;
+  --wpp-fundo: #efeae2;
+  --wpp-eu: #d9fdd3;
+  --wpp-ele: #ffffff;
+  --wpp-texto: #111b21;
+  --sombra: 0 1px 2px rgb(23 32 28 / 0.06), 0 8px 24px -12px rgb(23 32 28 / 0.18);
+  --raio: 10px;
+  --raio-p: 7px;
+  --fonte: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --papel: #121715; --superficie: #191f1c; --recuo: #0d110f; --tinta: #e9e6dc; --tinta-2: #a4aba3;
+    --linha: #29312d; --linha-forte: #414b46; --acento: #57c2a0; --acento-forte: #7bd6b8; --sobre-acento: #0a1d16;
+    --acento-suave: #16322a; --ambar: #d9a441; --ambar-fundo: #382c10; --ambar-texto: #edc97c;
+    --wpp-fundo: #0b141a; --wpp-eu: #005c4b; --wpp-ele: #202c33; --wpp-texto: #e9edef;
+    --sombra: 0 1px 2px rgb(0 0 0 / 0.4), 0 10px 28px -12px rgb(0 0 0 / 0.6);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --papel: #121715; --superficie: #191f1c; --recuo: #0d110f; --tinta: #e9e6dc; --tinta-2: #a4aba3;
+  --linha: #29312d; --linha-forte: #414b46; --acento: #57c2a0; --acento-forte: #7bd6b8; --sobre-acento: #0a1d16;
+  --acento-suave: #16322a; --ambar: #d9a441; --ambar-fundo: #382c10; --ambar-texto: #edc97c;
+  --wpp-fundo: #0b141a; --wpp-eu: #005c4b; --wpp-ele: #202c33; --wpp-texto: #e9edef;
+  --sombra: 0 1px 2px rgb(0 0 0 / 0.4), 0 10px 28px -12px rgb(0 0 0 / 0.6);
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { background: var(--papel); color: var(--tinta); font-family: var(--fonte); font-size: 1.0625rem; line-height: 1.6; -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums; }
+h1, h2, h3 { margin: 0; line-height: 1.12; letter-spacing: -0.02em; text-wrap: balance; }
+p { margin: 0; }
+:focus-visible { outline: 2px solid var(--acento); outline-offset: 3px; }
+.largura { max-width: 1160px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+/* Marca */
+.marca { display: flex; align-items: center; gap: .6rem; font-weight: 600; font-size: 1rem; }
+.marca span { width: 2rem; height: 2rem; border-radius: var(--raio-p); background: var(--acento); color: var(--sobre-acento); display: grid; place-items: center; font-weight: 800; }
+.marca b { font-weight: 800; }
+.topo { padding-block: 1.25rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; border-bottom: 1px solid var(--linha); }
+.topo small { color: var(--tinta-2); font-size: .88rem; }
+
+/* Hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+.hero-texto { display: grid; gap: 1.25rem; }
+.olho { font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--acento); }
+.hero h1 { font-size: clamp(2.3rem, 5.2vw, 3.9rem); font-weight: 800; }
+.hero h1 em { font-style: normal; color: var(--acento); }
+.hero .lead { font-size: clamp(1.05rem, 1.6vw, 1.2rem); color: var(--tinta-2); max-width: 46ch; }
+.hero .lead b { color: var(--tinta); font-weight: 650; }
+.numeros { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--linha); border-radius: var(--raio); background: var(--superficie); overflow: hidden; margin: 0; }
+.numeros div { padding: .85rem 1rem; border-left: 1px solid var(--linha); }
+.numeros div:first-child { border-left: none; }
+.numeros dt { font-size: .75rem; color: var(--tinta-2); font-weight: 600; }
+.numeros dd { margin: .1rem 0 0; font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 800; letter-spacing: -0.02em; }
+.numeros div:last-child dd { color: var(--acento); }
+.maquete { position: relative; border-radius: 14px; overflow: hidden; background: var(--recuo); border: 1px solid var(--linha); box-shadow: var(--sombra); aspect-ratio: 5 / 4; max-width: 100%; margin: 0; }
+#cidade { width: 100%; height: 100%; display: block; touch-action: pan-y; cursor: grab; }
+.maquete figcaption { position: absolute; left: .75rem; right: .75rem; bottom: .75rem; display: flex; gap: .5rem; flex-wrap: wrap; font-size: .8rem; color: var(--tinta-2); pointer-events: none; }
+.maquete figcaption span { background: color-mix(in srgb, var(--superficie) 88%, transparent); border: 1px solid var(--linha); border-radius: 999px; padding: .2rem .65rem; backdrop-filter: blur(6px); }
+.ponto { display: inline-block; width: .6rem; height: .6rem; border-radius: 50%; margin-right: .35rem; vertical-align: -.02rem; }
+#etiqueta { position: absolute; pointer-events: none; transform: translate(-50%, calc(-100% - 12px)); background: var(--superficie); color: var(--tinta); border: 1px solid var(--linha); box-shadow: var(--sombra); border-radius: var(--raio-p); padding: .45rem .7rem; font-size: .85rem; white-space: nowrap; }
+#etiqueta b { color: var(--acento); }
+
+/* Seções */
+.secao { border-top: 1px solid var(--linha); padding-block: clamp(2.75rem, 6vw, 4.5rem); display: grid; gap: 1.75rem; }
+.cabeca { display: grid; gap: .6rem; max-width: 62ch; }
+.cabeca h2 { font-size: clamp(1.7rem, 3.6vw, 2.5rem); font-weight: 800; }
+.cabeca p { color: var(--tinta-2); }
+.cartao { background: var(--superficie); border: 1px solid var(--linha); border-radius: var(--raio); }
+
+/* Pedidos */
+.pedidos { display: grid; gap: .75rem; }
+.pedido { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.3fr); }
+.pedido .fala { padding: 1.15rem 1.3rem; background: var(--recuo); border: 1px solid var(--linha); border-right: none; border-radius: var(--raio) 0 0 var(--raio); display: grid; gap: .35rem; align-content: start; }
+.pedido .fala small { font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--tinta-2); }
+.pedido .fala q { font-style: italic; quotes: "“" "”"; }
+.pedido .entrega { padding: 1.15rem 1.3rem; background: var(--superficie); border: 1px solid var(--linha); border-radius: 0 var(--raio) var(--raio) 0; display: grid; gap: .4rem; }
+.pedido h3 { font-size: 1.1rem; display: flex; align-items: center; gap: .55rem; flex-wrap: wrap; }
+.selo-ok { font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--acento); background: var(--acento-suave); padding: .15rem .55rem; border-radius: 999px; }
+.pedido .entrega p { color: var(--tinta-2); font-size: .98rem; }
+.pedido .entrega b { color: var(--tinta); font-weight: 650; }
+
+/* Linha de montagem */
+.etapas { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .75rem; list-style: none; padding: 0; margin: 0; counter-reset: etapa; }
+.etapas li { counter-increment: etapa; padding: 1.1rem 1rem; display: grid; gap: .35rem; align-content: start; }
+.etapas li::before { content: counter(etapa); width: 1.6rem; height: 1.6rem; border-radius: 50%; display: grid; place-items: center; font-size: .8rem; font-weight: 800; color: var(--sobre-acento); background: var(--acento); }
+.etapas strong { font-size: clamp(1.5rem, 2.4vw, 1.9rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+.etapas h3 { font-size: 1rem; }
+.etapas p { font-size: .88rem; color: var(--tinta-2); }
+.etapas li:last-child { background: var(--acento); border-color: var(--acento); color: var(--sobre-acento); }
+.etapas li:last-child p { color: var(--sobre-acento); opacity: .85; }
+.etapas li:last-child::before { background: var(--sobre-acento); color: var(--acento); }
+.barras { padding: 1.25rem 1.4rem; display: grid; gap: .65rem; }
+.barra { display: grid; grid-template-columns: 11rem minmax(0, 1fr) 4.5rem; gap: .9rem; align-items: center; font-size: .94rem; }
+.barra > span:first-child { color: var(--tinta-2); }
+.trilho { height: 10px; border-radius: 999px; background: var(--recuo); overflow: hidden; }
+.trilho i { display: block; height: 100%; border-radius: 999px; background: var(--acento); }
+.barra .valor { text-align: right; font-weight: 700; }
+.nota { font-size: .86rem; color: var(--tinta-2); }
+
+/* ICP */
+.eixos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; }
+.eixo { padding: 1.25rem 1.3rem; display: grid; gap: .4rem; align-content: start; }
+.eixo .peso { font-size: 2.3rem; font-weight: 800; color: var(--acento); line-height: 1; letter-spacing: -0.03em; }
+.eixo .peso small { font-size: .95rem; color: var(--tinta-2); font-weight: 600; margin-left: .2rem; }
+.eixo p { color: var(--tinta-2); font-size: .95rem; }
+.faixas { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; font-size: .9rem; color: var(--tinta-2); }
+.pilula { display: inline-flex; gap: .4rem; align-items: center; padding: .25rem .7rem; border-radius: 999px; font-weight: 600; font-size: .88rem; }
+.pilula.a { background: var(--acento-suave); color: var(--acento); }
+.pilula.b { background: var(--ambar-fundo); color: var(--ambar-texto); }
+.pilula.c { background: var(--recuo); color: var(--tinta-2); }
+.rolagem { overflow-x: auto; border: 1px solid var(--linha); border-radius: var(--raio); background: var(--superficie); }
+table { border-collapse: collapse; width: 100%; min-width: 980px; font-size: .9rem; }
+th, td { text-align: left; padding: .7rem .85rem; border-bottom: 1px solid var(--linha); vertical-align: top; }
+th { font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--tinta-2); background: var(--recuo); }
+tbody tr:last-child td { border-bottom: none; }
+td.n { text-align: right; white-space: nowrap; }
+td .seg { display: block; font-weight: 700; font-size: 1rem; }
+td .of { color: var(--acento); font-size: .86rem; }
+td.dor { color: var(--tinta-2); max-width: 30ch; }
+td.perg { font-style: italic; max-width: 32ch; }
+td.a { font-weight: 700; color: var(--acento); }
+.mini { display: inline-block; height: 6px; border-radius: 3px; background: var(--acento); vertical-align: middle; margin-right: .4rem; opacity: .75; }
+
+/* Script */
+.duas { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.5rem; align-items: start; }
+.celular { background: var(--wpp-fundo); border: 1px solid var(--linha); border-radius: 26px; padding: .9rem; max-width: 420px; width: 100%; justify-self: center; box-shadow: var(--sombra); }
+.celular header { display: flex; align-items: center; gap: .7rem; padding: .3rem .4rem .9rem; border-bottom: 1px solid color-mix(in srgb, var(--wpp-texto) 12%, transparent); color: var(--wpp-texto); }
+.avatar { width: 2.3rem; height: 2.3rem; border-radius: 50%; background: var(--acento); color: var(--sobre-acento); display: grid; place-items: center; font-weight: 800; }
+.celular header b { display: block; font-size: .95rem; }
+.celular header small { font-size: .78rem; opacity: .7; }
+.conversa { display: grid; gap: .5rem; padding: .9rem .2rem .3rem; }
+.balao { max-width: 88%; padding: .55rem .75rem 1rem; border-radius: 10px; font-size: .92rem; line-height: 1.45; position: relative; color: var(--wpp-texto); box-shadow: 0 1px 1px rgb(0 0 0 / .08); }
+.balao.eu { justify-self: end; background: var(--wpp-eu); border-top-right-radius: 2px; }
+.balao.ele { justify-self: start; background: var(--wpp-ele); border-top-left-radius: 2px; }
+.balao time { position: absolute; right: .5rem; bottom: .15rem; font-size: .66rem; opacity: .6; }
+.nota-celular { font-size: .76rem; color: var(--tinta-2); text-align: center; padding-top: .4rem; }
+.roteiro { list-style: none; padding: 0; margin: 0; display: grid; gap: .6rem; counter-reset: passo; }
+.roteiro li { counter-increment: passo; padding: .9rem 1.1rem .9rem 3.3rem; position: relative; background: var(--superficie); border: 1px solid var(--linha); border-radius: var(--raio); }
+.roteiro li::before { content: counter(passo); position: absolute; left: 1rem; top: .9rem; width: 1.6rem; height: 1.6rem; border-radius: 50%; display: grid; place-items: center; font-size: .82rem; font-weight: 800; color: var(--sobre-acento); background: var(--acento); }
+.roteiro b { font-weight: 650; }
+.objecoes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; }
+.objecao { padding: 1.1rem 1.2rem; display: grid; gap: .4rem; align-content: start; }
+.objecao h3 { font-size: 1.05rem; }
+.objecao p { font-size: .93rem; color: var(--tinta-2); }
+.destaque { padding: 1.3rem 1.5rem; background: var(--acento-suave); border: 1px solid color-mix(in srgb, var(--acento) 30%, transparent); border-radius: var(--raio); display: grid; gap: .4rem; }
+.destaque h3 { color: var(--acento); font-size: 1.15rem; }
+.destaque p { color: var(--tinta); }
+
+/* Acompanhamento */
+.grade-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; }
+.bloco { padding: 1.2rem 1.3rem; display: grid; gap: .5rem; align-content: start; }
+.bloco h3 { font-size: 1.08rem; }
+.bloco p { color: var(--tinta-2); font-size: .95rem; }
+.icone { width: 2.3rem; height: 2.3rem; border-radius: var(--raio-p); display: grid; place-items: center; background: var(--acento-suave); color: var(--acento); }
+.icone svg { width: 1.2rem; height: 1.2rem; }
+
+/* Plano */
+.plano { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 1.25rem; align-items: start; }
+.grafico { padding: 1.3rem 1.3rem 1rem; margin: 0; display: grid; gap: .7rem; }
+.grafico svg { width: 100%; height: auto; display: block; }
+.grafico figcaption { font-size: .86rem; color: var(--tinta-2); }
+.g-grade { stroke: var(--linha); }
+.g-texto { fill: var(--tinta-2); font-family: var(--fonte); }
+.g-valor { fill: var(--tinta); font-family: var(--fonte); font-weight: 700; }
+.g-barra { fill: var(--acento); opacity: .35; }
+.g-barra.meta { opacity: 1; }
+.g-meta { stroke: var(--ambar); }
+.g-meta-texto { fill: var(--ambar); font-family: var(--fonte); font-weight: 700; }
+.conta { padding: 1.3rem; display: grid; gap: .8rem; }
+.conta h3 { font-size: 1.15rem; }
+.passos-conta { display: grid; gap: .4rem; }
+.passos-conta div { display: flex; justify-content: space-between; gap: 1rem; padding: .55rem .8rem; background: var(--recuo); border-radius: var(--raio-p); font-size: .95rem; }
+.passos-conta div b { font-weight: 700; }
+.passos-conta div:last-child { background: var(--acento); color: var(--sobre-acento); }
+
+/* Equipe */
+.equipe { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .75rem; }
+.pessoa { padding: 1.2rem 1.25rem; display: grid; gap: .35rem; align-content: start; }
+.pessoa .papel { font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--acento); }
+.pessoa h3 { font-size: 1.3rem; }
+.pessoa p { color: var(--tinta-2); font-size: .93rem; }
+.divisao { display: grid; grid-template-columns: 7fr 3fr; border-radius: var(--raio); overflow: hidden; border: 1px solid var(--linha); }
+.divisao div { padding: 1rem 1.2rem; font-weight: 800; font-size: clamp(1rem, 2.2vw, 1.35rem); }
+.divisao div:first-child { background: var(--acento); color: var(--sobre-acento); }
+.divisao div:last-child { background: var(--ambar-fundo); color: var(--ambar-texto); text-align: center; }
+
+/* Fecho */
+.fecho { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.5rem; align-items: start; }
+.proximos { list-style: none; padding: 0; margin: 0; display: grid; gap: .6rem; }
+.proximos li { padding: .9rem 1.1rem; display: grid; gap: .15rem; }
+.proximos li span { color: var(--tinta-2); font-size: .94rem; }
+.citacao { padding: 1.75rem; display: grid; gap: .9rem; background: var(--acento); color: var(--sobre-acento); border-radius: var(--raio); }
+.citacao q { font-size: clamp(1.35rem, 2.6vw, 1.8rem); font-weight: 700; line-height: 1.3; quotes: "“" "”"; letter-spacing: -0.01em; }
+.citacao small { opacity: .85; }
+.rodape { border-top: 1px solid var(--linha); padding-block: 1.75rem 2.5rem; color: var(--tinta-2); font-size: .85rem; display: grid; gap: .3rem; }
+
+@media (max-width: 980px) {
+  .hero, .duas, .plano, .fecho { grid-template-columns: minmax(0, 1fr); }
+  .etapas { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .objecoes, .grade-3, .equipe { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 680px) {
+  .pedido { grid-template-columns: minmax(0, 1fr); }
+  .pedido .fala { border-right: 1px solid var(--linha); border-bottom: none; border-radius: var(--raio) var(--raio) 0 0; }
+  .pedido .entrega { border-radius: 0 0 var(--raio) var(--raio); }
+  .numeros { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .numeros div:nth-child(3) { border-left: none; }
+  .numeros div:nth-child(n+3) { border-top: 1px solid var(--linha); }
+  .eixos { grid-template-columns: minmax(0, 1fr); }
+  .barra { grid-template-columns: 7.5rem minmax(0, 1fr) 3.8rem; font-size: .86rem; }
+}
+@media (max-width: 520px) {
+  .etapas, .objecoes, .grade-3, .equipe { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+
+</head>
+<body>
+<div class="largura">
+  <div class="topo">
+    <div class="marca"><span aria-hidden="true">A</span><div>Autark <b>Prospecção</b></div></div>
+    <small>Para o Haneki · 15/11/2026</small>
+  </div>
+
+  <header class="hero">
+    <div class="hero-texto">
+      <span class="olho">Resposta aos seus áudios</span>
+      <h1>O que você pediu já está <em>rodando</em></h1>
+      <p class="lead">Você pediu para <b>investir no Matheus</b>, ver o <b>documento de ICP</b>, ver <b>como ele aborda</b>, ter um <b>script de abordagem fria</b> forte e um <b>plano para ele crescer</b> junto com a gente. Está tudo construído e em produção, com a base coletada, conferida e pontuada.</p>
+      <dl class="numeros">
+        <div><dt>Coletados</dt><dd>6.328</dd></div>
+        <div><dt>Qualificados</dt><dd>4.667</dd></div>
+        <div><dt>Cidades</dt><dd>2</dd></div>
+        <div><dt>Prioridade A</dt><dd>484</dd></div>
+      </dl>
+    </div>
+    <figure class="maquete">
+      <canvas id="cidade" role="img" aria-label="Maquete 3D da base: 19 prédios, um por segmento, com altura proporcional aos leads qualificados e a coroa de vidro verde proporcional aos leads prioridade A"></canvas>
+      <div id="etiqueta" hidden></div>
+      <figcaption><span>Um prédio por segmento · altura = qualificados</span><span><i class="ponto" style="background:var(--acento)"></i>vidro verde = prioridade A</span></figcaption>
+    </figure>
+  </header>
+
+  <section class="secao" id="pedidos">
+    <div class="cabeca">
+      <span class="olho">Seus áudios, item por item</span>
+      <h2>Cada pedido tem resposta no sistema</h2>
+      <p>À esquerda, o que você disse. À direita, onde isso já funciona hoje.</p>
+    </div>
+    <div class="pedidos">
+      <div class="pedido"><div class="fala"><small>Áudio 1</small><q>Investe nele, velho. Ele é um moleque bom e já demonstra essa vontade.</q></div><div class="entrega"><h3>Paulista inteira é do Matheus <span class="selo-ok">No ar</span></h3><p>Acesso próprio, com <b>2.904 negócios qualificados de Paulista</b> que só ele vê. Lorena (1.763) ficou com o João Gabriel, para um não pisar no lead do outro.</p></div></div>
+      <div class="pedido"><div class="fala"><small>Áudio 1</small><q>Se ele já tiver montado o documentozinho de ICP, manda pra eu dar uma olhada.</q></div><div class="entrega"><h3>ICP em 19 segmentos, com nota <span class="selo-ok">No ar</span></h3><p>Cada segmento tem <b>oferta, dor, pergunta de abertura e faixa de preço</b>. Cada negócio recebe nota de 0 a 100 com o motivo escrito na ficha.</p></div></div>
+      <div class="pedido"><div class="fala"><small>Áudio 1</small><q>Cold call é um bagulho que tem que ser bom. Tem que ter um script bom.</q></div><div class="entrega"><h3>Script pronto para cada negócio <span class="selo-ok">No ar</span></h3><p>Mensagem de WhatsApp montada com o dado daquele lead, roteiro de visita em 5 passos, respostas para as objeções e treino. <b>Nada é enviado sozinho</b>: quem fala é ele, uma pessoa por vez.</p></div></div>
+      <div class="pedido"><div class="fala"><small>Áudio 1</small><q>Ver como é que ele tá abordando esse pessoal.</q></div><div class="entrega"><h3>Seu acesso de acompanhamento <span class="selo-ok">No ar</span></h3><p>Com o seu acesso você vê cada contato registrado, o resultado, o funil e os relatórios por pessoa, <b>sem alterar nada</b>. A visita marca a distância até o endereço do negócio.</p></div></div>
+      <div class="pedido"><div class="fala"><small>Áudios 2 e 3</small><q>A ideia é ele ganhar cinco vezes mais. Com 4, 5 contos ele vive muito bem.</q></div><div class="entrega"><h3>Comissão de 30% e meta quebrada por dia <span class="selo-ok">No ar</span></h3><p>O sistema calcula a comissão de cada venda e mostra quanto falta. Para <b>R$ 5 mil por mês</b> são cerca de <b>4 vendas</b>; o plano está mais abaixo.</p></div></div>
+    </div>
+  </section>
+
+  <section class="secao" id="estrutura">
+    <div class="cabeca">
+      <span class="olho">Estrutura</span>
+      <h2>Da busca no Google Maps até a ficha no celular</h2>
+      <p>A base inteira passa por estas etapas a cada atualização. Números da coleta de 13/11/2026.</p>
+    </div>
+    <ol class="etapas">
+      <li class="cartao"><strong>8.984</strong><h3>Coleta</h3><p>100 buscas por cidade no Google Maps, em 19 segmentos.</p></li>
+      <li class="cartao"><strong>6.328</strong><h3>Limpeza</h3><p>Repetidos juntados pelo telefone; cidade e bairro conferidos.</p></li>
+      <li class="cartao"><strong>986</strong><h3>Sites testados</h3><p>HTTPS, celular, WhatsApp e agendamento de cada site.</p></li>
+      <li class="cartao"><strong>785</strong><h3>Navegador real</h3><p>Aberto num celular simulado, com tempo de carga e foto da tela.</p></li>
+      <li class="cartao"><strong>107</strong><h3>CNPJ</h3><p>Idade, porte e situação da empresa na Receita.</p></li>
+      <li class="cartao"><strong>4.667</strong><h3>Qualificados</h3><p>Pontuados, ordenados e prontos na mão do prospector.</p></li>
+    </ol>
+    <div class="barras cartao">
+      <div class="barra"><span>Paulista - PE</span><div class="trilho"><i style="width:100%"></i></div><span class="valor">2.904</span></div>
+      <div class="barra"><span>Lorena - SP</span><div class="trilho"><i style="width:60.7%"></i></div><span class="valor">1.763</span></div>
+      <div class="barra"><span>Com celular</span><div class="trilho"><i style="width:75.2%"></i></div><span class="valor">3.510</span></div>
+      <div class="barra"><span>Sem site nenhum</span><div class="trilho"><i style="width:58.9%"></i></div><span class="valor">2.748</span></div>
+    </div>
+    <p class="nota">Falta de WhatsApp no site só conta quando o navegador real confirma: a leitura simples apontava 459 casos, o navegador confirmou 234. O prospector só fala o que foi medido.</p>
+  </section>
+
+  <section class="secao" id="icp">
+    <div class="cabeca">
+      <span class="olho">Documento de ICP</span>
+      <h2>Quem é o cliente ideal, e por quê</h2>
+      <p>Pequeno e médio negócio local, ativo no Google Maps, com bom volume de avaliações e um processo que hoje roda no braço. Cada lead ganha nota em três eixos, e a ficha mostra a evidência de cada ponto.</p>
+    </div>
+    <div class="eixos">
+      <div class="eixo cartao"><span class="peso">40<small>pontos</small></span><h3>Oportunidade</h3><p>Sem site, site lento no celular, sem WhatsApp no site, sem agendamento. A dor que dá para mostrar na hora.</p></div>
+      <div class="eixo cartao"><span class="peso">35<small>pontos</small></span><h3>Capacidade de pagar</h3><p>Segmento de ticket alto, número de avaliações, nota, idade e porte da empresa na Receita.</p></div>
+      <div class="eixo cartao"><span class="peso">25<small>pontos</small></span><h3>Facilidade de contato</h3><p>Celular com WhatsApp, endereço para visita e horário de funcionamento conhecido.</p></div>
+    </div>
+    <div class="faixas">
+      <span class="pilula a">A · 75 ou mais · 484</span>
+      <span class="pilula b">B · 65 a 74 · 1.386</span>
+      <span class="pilula c">C · 50 a 64 · 2.797</span>
+      <span>Fora logo de cara: rede ou franquia, órgão público, CNPJ inativo, fechado no Maps, fora da cidade.</span>
+    </div>
+    <div class="rolagem">
+      <table>
+        <thead><tr><th>Segmento e oferta</th><th>Dor</th><th>Pergunta de abertura</th><th style="text-align:right">Ticket</th><th style="text-align:right">Paulista</th><th style="text-align:right">Lorena</th><th style="text-align:right">Prioridade A</th></tr></thead>
+        <tbody id="tabela-icp"></tbody>
+      </table>
+    </div>
+    <p class="nota">Porta de entrada para todos os segmentos: site profissional com WhatsApp, de R$ 1.500 a R$ 3.000. Resolve o básico e abre caminho para o sistema.</p>
+  </section>
+
+  <section class="secao" id="script">
+    <div class="cabeca">
+      <span class="olho">Script de abordagem fria</span>
+      <h2>Mensagem e visita prontas para cada lead</h2>
+      <p>Como você disse: sem Instagram, é abordagem fria. O sistema escreve a abertura com o dado daquele negócio, e o prospector manda do próprio WhatsApp ou fala na porta.</p>
+    </div>
+    <div class="duas">
+      <div class="celular" role="img" aria-label="Exemplo de conversa de WhatsApp com a mensagem que o sistema gera">
+        <header><span class="avatar" aria-hidden="true">B</span><div><b>Barbearia (exemplo)</b><small>Janga, Paulista</small></div></header>
+        <div class="conversa">
+          <div class="balao eu">Oi, tudo bem? Aqui é Matheus, sou daqui de Paulista. Estava olhando negócios da cidade e vi no Google Maps que o perfil de vocês não tem site cadastrado. Trabalho com um desenvolvedor que faz agenda online para salão e barbearia. Quem marca os horários hoje: você mesmo, no meio do atendimento?<time>09:12</time></div>
+          <div class="balao ele">Sou eu mesmo, paro o corte toda hora pra responder<time>09:31</time></div>
+          <div class="balao eu">Imaginei. Posso passar aí amanhã às 10h e te mostrar no celular como fica? Leva 5 minutos.<time>09:32</time></div>
+        </div>
+        <p class="nota-celular">A primeira mensagem é a que o sistema gera. A resposta é ilustrativa.</p>
+      </div>
+      <div style="display:grid;gap:.9rem">
+        <h3 style="font-size:1.2rem">Roteiro de visita, em 5 passos</h3>
+        <ol class="roteiro">
+          <li>Peça para falar com o <b>dono</b>. Não estando, anote o melhor horário como próximo passo.</li>
+          <li>Apresentação curta, com o fato medido: <b>“vi no Google Maps que vocês não têm site”</b>.</li>
+          <li>Faça a <b>pergunta de abertura</b> do segmento e escute. A dor sai da boca dele.</li>
+          <li>Toque em <b>Abrir prévia</b> e entregue o celular: ele vê o site do próprio negócio, com nome, horário e avaliações.</li>
+          <li>Feche o próximo passo com o <b>diagnóstico preenchido</b>. O Alisson recebe o aviso e monta a proposta.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="objecoes">
+      <div class="objecao cartao"><h3>“Tá caro.”</h3><p>Não rebata o preço. Volte para a dor: “Quanto o senhor perde por mês com isso?” Se fizer sentido, comece pela porta de entrada.</p></div>
+      <div class="objecao cartao"><h3>“Já tenho Instagram.”</h3><p>“Ótimo, é por lá que o cliente conhece vocês. E na hora de marcar ou pedir, como é?”</p></div>
+      <div class="objecao cartao"><h3>“Vou pensar.”</h3><p>“Claro. O que faltou eu explicar para o senhor decidir?” Combine a data de retorno e registre.</p></div>
+      <div class="objecao cartao"><h3>“Não tenho tempo agora.”</h3><p>“Qual o melhor dia e horário para eu voltar?” Anote como próximo passo. Não insista na hora.</p></div>
+      <div class="objecao cartao"><h3>“Já uso um sistema.”</h3><p>“Qual? O que o senhor mudaria nele?” Se ele reclamar, a reclamação é a dor.</p></div>
+      <div class="objecao cartao"><h3>“Me manda por WhatsApp.”</h3><p>Manda na hora, pelo próprio WhatsApp, a prévia do site dele e uma frase sobre a dor. Combina o retorno.</p></div>
+    </div>
+    <div class="destaque">
+      <h3>Onde você entra: energia e confiança na fala</h3>
+      <p>O texto já sai pronto; o tom de voz, não. Sua experiência em comercial, oferta e tráfego vale mais aqui: ouvir o Matheus numa abordagem, ajustar o script e treinar objeção com ele. O Playbook do sistema tem o treino para isso.</p>
+    </div>
+  </section>
+
+  <section class="secao" id="acompanhamento">
+    <div class="cabeca">
+      <span class="olho">Acompanhamento</span>
+      <h2>Você vê tudo o que ele faz, sem mexer em nada</h2>
+      <p>O seu acesso é só de leitura. O servidor recusa qualquer alteração, então dá para olhar à vontade.</p>
+    </div>
+    <div class="grade-3">
+      <div class="bloco cartao"><span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span><h3>Funil por pessoa</h3><p>Abordagens, conversas, diagnósticos, propostas e vendas de cada um, por semana e por mês.</p></div>
+      <div class="bloco cartao"><span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span><h3>Visita com local</h3><p>Ao registrar a visita, o celular marca a posição e o histórico mostra a distância até o negócio.</p></div>
+      <div class="bloco cartao"><span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 5h16v11H8l-4 4z"/></svg></span><h3>Cada contato registrado</h3><p>Canal, resultado, anotação e próximo passo. Lead parado há uma semana aparece em destaque.</p></div>
+      <div class="bloco cartao"><span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><h3>Rotina diária</h3><p>Lembrete dos retornos do dia, segunda tentativa na fila e resumo da semana às segundas.</p></div>
+      <div class="bloco cartao"><span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 3h9l3 3v15H6z"/><path d="M9 12h6M9 16h6"/></svg></span><h3>Proposta e contrato</h3><p>Proposta com aceite online e PIX da entrada. O contrato sai pronto a partir do aceite.</p></div>
+      <div class="bloco cartao"><span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg></span><h3>Regras que protegem a marca</h3><p>Nada de disparo em massa. Quem pede para não ser contatado sai da lista para sempre.</p></div>
+    </div>
+  </section>
+
+  <section class="secao" id="plano">
+    <div class="cabeca">
+      <span class="olho">Plano do Matheus</span>
+      <h2>Quanto ele precisa vender para chegar em R$ 5 mil</h2>
+      <p>Comissão de 30% sobre cada contrato, com ticket médio de R$ 4 mil: cada venda rende R$ 1.200 para ele.</p>
+    </div>
+    <div class="plano">
+      <figure class="grafico cartao">
+        <svg viewBox="0 0 560 300" role="img" aria-label="Comissão mensal por número de vendas: 1 venda R$ 1.200, 2 vendas R$ 2.400, 3 vendas R$ 3.600, 4 vendas R$ 4.800, 5 vendas R$ 6.000; meta de R$ 5 mil">
+          <g font-size="12">
+            <line class="g-grade" x1="60" y1="250" x2="540" y2="250"/>
+            <line class="g-grade" x1="60" y1="190" x2="540" y2="190" stroke-dasharray="3 5"/>
+            <line class="g-grade" x1="60" y1="130" x2="540" y2="130" stroke-dasharray="3 5"/>
+            <line class="g-grade" x1="60" y1="70" x2="540" y2="70" stroke-dasharray="3 5"/>
+            <text class="g-texto" x="52" y="254" text-anchor="end">0</text>
+            <text class="g-texto" x="52" y="194" text-anchor="end">2 mil</text>
+            <text class="g-texto" x="52" y="134" text-anchor="end">4 mil</text>
+            <text class="g-texto" x="52" y="74" text-anchor="end">6 mil</text>
+          </g>
+          <rect class="g-barra" x="84" y="214" width="62" height="36" rx="4"/>
+          <rect class="g-barra" x="178" y="178" width="62" height="72" rx="4"/>
+          <rect class="g-barra" x="272" y="142" width="62" height="108" rx="4"/>
+          <rect class="g-barra" x="366" y="106" width="62" height="144" rx="4"/>
+          <rect class="g-barra meta" x="460" y="70" width="62" height="180" rx="4"/>
+          <line class="g-meta" x1="60" y1="100" x2="540" y2="100" stroke-width="1.5" stroke-dasharray="6 4"/>
+          <text class="g-meta-texto" x="60" y="92" font-size="12">meta R$ 5 mil</text>
+          <g font-size="13" text-anchor="middle">
+            <text class="g-valor" x="115" y="206">1,2 mil</text><text class="g-valor" x="209" y="170">2,4 mil</text><text class="g-valor" x="303" y="134">3,6 mil</text><text class="g-valor" x="397" y="98">4,8 mil</text><text class="g-valor" x="491" y="62">6 mil</text>
+            <text class="g-texto" x="115" y="272">1 venda</text><text class="g-texto" x="209" y="272">2 vendas</text><text class="g-texto" x="303" y="272">3 vendas</text><text class="g-texto" x="397" y="272">4 vendas</text><text class="g-texto" x="491" y="272">5 vendas</text>
+          </g>
+        </svg>
+        <figcaption>Comissão por mês conforme as vendas fechadas, com ticket médio de R$ 4 mil. Cliente de ticket alto (clínica, escola, contabilidade, até R$ 12 mil) chega lá com menos vendas.</figcaption>
+      </figure>
+      <div class="conta cartao">
+        <h3>A meta virada em rotina</h3>
+        <div class="passos-conta">
+          <div><span>Vendas no mês</span><b>≈ 4</b></div>
+          <div><span>Propostas (30% fecham)</span><b>≈ 14</b></div>
+          <div><span>Diagnósticos (70% viram proposta)</span><b>≈ 20</b></div>
+          <div><span>Conversas (40% dão diagnóstico)</span><b>≈ 50</b></div>
+          <div><span>Abordagens (25% respondem)</span><b>≈ 200</b></div>
+          <div><span>Por dia útil</span><b>≈ 9 abordagens</b></div>
+        </div>
+        <p class="nota">As taxas são o ponto de partida do sistema e se ajustam com os registros reais; na primeira semana já dá para ver as dele. Começando pelos 323 leads A de Paulista, a conversa tende a vir mais rápido.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao" id="equipe">
+    <div class="cabeca">
+      <span class="olho">Equipe e divisão</span>
+      <h2>Todo mundo cresce junto</h2>
+      <p>Do jeito que você falou: ele ganha bem, a gente ganha bem, e a base cresce a cada venda.</p>
+    </div>
+    <div class="equipe">
+      <div class="pessoa cartao"><span class="papel">Desenvolvimento</span><h3>Alisson</h3><p>Monta a proposta, fecha o contrato, desenvolve e atende depois da venda.</p></div>
+      <div class="pessoa cartao"><span class="papel">Prospecção · Paulista</span><h3>Matheus</h3><p>Paulista inteira: 2.904 negócios qualificados, 323 deles prioridade A.</p></div>
+      <div class="pessoa cartao"><span class="papel">Prospecção · Lorena</span><h3>João Gabriel</h3><p>Lorena inteira: 1.763 negócios qualificados, 161 deles prioridade A.</p></div>
+      <div class="pessoa cartao"><span class="papel">Acompanhamento</span><h3>Haneki</h3><p>Vê tudo e orienta comercial, oferta e tráfego. Acesso só de leitura.</p></div>
+    </div>
+    <div class="divisao" role="img" aria-label="Divisão de cada contrato: 70% Autark, 30% prospector"><div>70% Autark</div><div>30% prospector</div></div>
+  </section>
+
+  <section class="secao" id="proximos">
+    <div class="fecho">
+      <div style="display:grid;gap:1.1rem">
+        <div class="cabeca"><span class="olho">Próximos passos</span><h2>O que dá para fazer nesta semana</h2></div>
+        <ul class="proximos">
+          <li class="cartao"><b>Entrar com o seu acesso</b><span>O login e a senha vão por mensagem separada; no primeiro acesso você cria a sua.</span></li>
+          <li class="cartao"><b>Ler o ICP e o script</b><span>Os textos estão no Playbook do sistema. Toda sugestão sua vira mudança no texto que o Matheus usa.</span></li>
+          <li class="cartao"><b>Ouvir uma abordagem do Matheus</b><span>Vinte minutos de treino de energia, confiança e objeção valem mais que qualquer texto.</span></li>
+          <li class="cartao"><b>Primeira semana medida</b><span>Na sexta, os relatórios mostram as taxas reais dele. A meta se ajusta a partir delas.</span></li>
+        </ul>
+      </div>
+      <div class="citacao"><q>Se conseguir fazer o Matheus chegar nisso e ter uma projeção de crescimento, vai ser muito bom.</q><small>Haneki, áudio de 15/11/2026</small><p>A estrutura está pronta para isso. Agora é rua, WhatsApp e registro.</p></div>
+    </div>
+  </section>
+
+  <footer class="rodape">
+    <p>Autark Prospecção · números lidos da base de produção em 13/11/2026: 6.328 negócios coletados, 4.667 qualificados em Paulista - PE e Lorena - SP.</p>
+    <p>Maquete 3D: um prédio por segmento; altura proporcional aos qualificados nas duas cidades; a coroa de vidro verde cresce com os leads prioridade A. Arraste para girar.</p>
+  </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js" integrity="sha384-vV17nr/rMaJqmeZkFUzXLpHdQ+ME5QHKdydaqqN+3Ga39RJlNrTatJxHwGV4ml2C" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/environments/RoomEnvironment.js" integrity="sha384-NG9Vjao8FDKsRPhzsQGvMRSCrkgzJlysZlYZ69P52mH1tEpkurCHq0M8jbSP7/gl" crossorigin="anonymous"></script>
+<script>
+// Base real (produção, 13/11/2026): [segmento, oferta, dor, pergunta, ticket mín, ticket máx, Paulista, Lorena, A]
+const SEGMENTOS = [
+  ["Restaurante e delivery", "Cardápio digital com pedido próprio", "O aplicativo de entrega fica com uma fatia grande de cada pedido.", "Quanto do faturamento de entrega fica com o aplicativo hoje?", 1500, 5000, 339, 196, 99],
+  ["Clínicas e saúde", "Agendamento online e atendimento organizado", "A recepção não dá conta do WhatsApp e paciente desiste de marcar.", "Quanto tempo um paciente espera para ser respondido no WhatsApp?", 3000, 8000, 225, 163, 81],
+  ["Comércio e distribuição", "Catálogo online com pedido e estoque", "Cliente pergunta preço e disponibilidade um por um no WhatsApp.", "Quantas vezes por dia vocês respondem “tem tal produto? quanto é?”", 3000, 10000, 480, 283, 42],
+  ["Odontologia", "Agenda online com confirmação pelo WhatsApp", "Paciente falta sem avisar e a cadeira fica parada.", "Quantos pacientes faltam por semana sem avisar?", 2500, 6000, 74, 65, 38],
+  ["Academia e pilates", "Gestão de alunos e mensalidade", "Mensalidade atrasada que ninguém cobra e aluno que some.", "Como vocês sabem hoje quem está com a mensalidade atrasada?", 3000, 8000, 95, 56, 36],
+  ["Pet e veterinária", "Agenda de banho, tosa e consultas", "Vacina e retorno vencem e ninguém avisa o tutor.", "Como vocês lembram o cliente da vacina ou do retorno?", 2500, 6000, 79, 57, 30],
+  ["Buffet e eventos", "Orçamento online e agenda de datas", "Cada orçamento é feito à mão e o cliente demora a receber.", "Quanto tempo leva para um cliente receber um orçamento de festa?", 2500, 6000, 78, 39, 26],
+  ["Salão e barbearia", "Agenda online por profissional", "O dono para o corte para responder mensagem de agendamento.", "Quem marca os horários hoje: você mesmo, no meio do atendimento?", 1500, 4000, 142, 117, 25],
+  ["Estética", "Agenda online com sinal por PIX", "Cliente marca, não paga sinal e não aparece.", "Vocês cobram sinal para segurar o horário? Como controlam?", 2500, 6000, 107, 58, 22],
+  ["Oficina e auto center", "Ordem de serviço e orçamento pelo WhatsApp", "Orçamento no papel, cliente que não aprova e carro parado no pátio.", "Como o cliente aprova o orçamento hoje: por ligação, por mensagem?", 2500, 7000, 185, 137, 14],
+  ["Advocacia", "Atendimento e triagem de clientes do escritório", "O advogado perde horas respondendo a mesma pergunta e cliente novo fica sem resposta.", "Quem responde o WhatsApp do escritório quando o doutor está em audiência?", 4000, 12000, 80, 67, 14],
+  ["Imobiliária", "Site com catálogo de imóveis e gestão de interessados", "Interessado chama no WhatsApp, o corretor demora e o contato se perde.", "Quando alguém pergunta de um imóvel, onde esse contato fica anotado?", 4000, 10000, 72, 51, 13],
+  ["Serviços", "Orçamento, agenda e ordem de serviço", "Pedido de orçamento se perde no WhatsApp e a agenda fica na cabeça do dono.", "Onde ficam anotados os pedidos de orçamento que chegam?", 2500, 7000, 441, 148, 12],
+  ["Escola e cursos", "Matrícula online e portal do aluno", "Matrícula no papel e inadimplência controlada em caderno.", "Como é feita a matrícula e a cobrança da mensalidade hoje?", 4000, 12000, 204, 81, 11],
+  ["Pousada e hospedagem", "Reserva direta com calendário", "O portal de reservas fica com uma parte de cada diária.", "Quanto das reservas de vocês vem por portal e quanto vem direto?", 3000, 8000, 21, 9, 5],
+  ["Transporte e logística", "Controle de coletas e entregas", "O cliente liga para saber onde está a carga e ninguém sabe responder.", "Quando o cliente pergunta onde está a entrega, como vocês descobrem?", 4000, 12000, 42, 26, 4],
+  ["Seguros e crédito", "Gestão de propostas e comissões", "Comissão calculada em planilha e renovação esquecida.", "Como vocês calculam a comissão de cada vendedor hoje?", 4000, 12000, 29, 22, 4],
+  ["Contabilidade", "Portal do cliente e cobrança de documentos", "Todo mês o escritório corre atrás de cliente que não mandou documento.", "Como vocês cobram documento de cliente no fechamento do mês?", 4000, 12000, 72, 29, 4],
+  ["Outros", "Sistema sob medida", "Processo manual que toma tempo todo dia.", "Qual tarefa do dia a dia mais toma o tempo de vocês?", 2500, 8000, 137, 159, 4],
+];
+const milhar = (n) => n.toLocaleString("pt-BR");
+const mil = (n) => (n / 1000).toLocaleString("pt-BR", { maximumFractionDigits: 1 });
+const maxA = Math.max(...SEGMENTOS.map((s) => s[8]));
+document.getElementById("tabela-icp").innerHTML = SEGMENTOS.map((s) => `
+  <tr>
+    <td><span class="seg">${s[0]}</span><span class="of">${s[1]}</span></td>
+    <td class="dor">${s[2]}</td>
+    <td class="perg">“${s[3]}”</td>
+    <td class="n">R$ ${mil(s[4])} a ${mil(s[5])} mil</td>
+    <td class="n">${milhar(s[6])}</td>
+    <td class="n">${milhar(s[7])}</td>
+    <td class="n a"><span class="mini" style="width:${Math.max(3, (s[8] / maxA) * 46)}px"></span>${s[8]}</td>
+  </tr>`).join("");
+
+// ---------- Maquete 3D realista ----------
+// Renderização física: materiais PBR, reflexos de um estúdio (RoomEnvironment), sombras suaves (VSM) e exposição ACES.
+(function () {
+  const tela = document.getElementById("cidade");
+  const caixa = tela.parentElement;
+  const etiqueta = document.getElementById("etiqueta");
+  if (!window.THREE) return;
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({ canvas: tela, antialias: true, preserveDrawingBuffer: true }); } catch (e) { return; }
+  const parado = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.0;
+  renderer.physicallyCorrectLights = true;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFShadowMap;
+
+  const cena = new THREE.Scene();
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  cena.environment = pmrem.fromScene(new THREE.RoomEnvironment(), 0.04).texture;
+  const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 300);
+
+  // Cores vêm dos tokens da página, para a maquete acompanhar o tema claro ou escuro.
+  const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  const cor = (v) => new THREE.Color(css(v)).convertSRGBToLinear();
+  const hex = (h) => new THREE.Color(h).convertSRGBToLinear();
+
+  // Mesa e base da maquete
+  const mesa = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.MeshStandardMaterial({ roughness: 0.95, metalness: 0 }));
+  mesa.rotation.x = -Math.PI / 2; mesa.receiveShadow = true; cena.add(mesa);
+  const base = new THREE.Mesh(new THREE.BoxGeometry(34, 0.6, 34), new THREE.MeshPhysicalMaterial({ roughness: 0.7, clearcoat: 0.15 }));
+  base.position.y = 0.3; base.receiveShadow = true; base.castShadow = true; cena.add(base);
+  const matRua = new THREE.MeshStandardMaterial({ roughness: 1 });
+  // Colunas de quadras em x = 0, ±6,4, ±12,8 e fileiras em z = ±3,2, ±9,6: as ruas passam entre elas.
+  const ruaX = [-9.6, -3.2, 3.2, 9.6], ruaZ = [-12.8, -6.4, 0, 6.4, 12.8];
+  for (const x of ruaX) { const r = new THREE.Mesh(new THREE.PlaneGeometry(0.22, 33), matRua); r.rotation.x = -Math.PI / 2; r.position.set(x, 0.605, 0); cena.add(r); }
+  for (const z of ruaZ) { const r = new THREE.Mesh(new THREE.PlaneGeometry(33, 0.22), matRua); r.rotation.x = -Math.PI / 2; r.position.set(0, 0.605, z); cena.add(r); }
+
+  const sol = new THREE.DirectionalLight(0xfff2dc, 3.2);
+  sol.position.set(-18, 30, 14); sol.castShadow = true;
+  sol.shadow.mapSize.set(4096, 4096); sol.shadow.radius = 3.5; sol.shadow.bias = -0.0002; sol.shadow.normalBias = 0.02;
+  Object.assign(sol.shadow.camera, { left: -24, right: 24, top: 24, bottom: -24, near: 5, far: 80 });
+  cena.add(sol);
+  const ceu = new THREE.HemisphereLight(0xf4f1e8, 0x8a8370, 0.9); cena.add(ceu);
+
+  // Prédios: um por segmento, nas quadras de uma grade 5×4; os mais altos no miolo
+  const torres = [];
+  const maxQ = Math.max(...SEGMENTOS.map((s) => s[6] + s[7]));
+  const ordem = [...SEGMENTOS].sort((a, b) => b[6] + b[7] - (a[6] + a[7]));
+  const vagas = [];
+  for (let z = -1.5; z <= 1.5; z++) for (let x = -2; x <= 2; x++) vagas.push([x, z]);
+  vagas.sort((p, q) => Math.hypot(p[0], p[1] * 1.2) - Math.hypot(q[0], q[1] * 1.2));
+  // Concreto claro fosco, vidro de fachada espelhado e coroa de vidro verde translúcido
+  const matPredio = new THREE.MeshPhysicalMaterial({ roughness: 0.82, metalness: 0, clearcoat: 0.08, clearcoatRoughness: 0.7 });
+  const matVidro = new THREE.MeshPhysicalMaterial({ roughness: 0.12, metalness: 0, transmission: 0.82, thickness: 1.6, ior: 1.5, attenuationDistance: 2.2, clearcoat: 1, clearcoatRoughness: 0.05, specularIntensity: 1 });
+  const matJanela = new THREE.MeshPhysicalMaterial({ roughness: 0.08, metalness: 0.55, clearcoat: 1, clearcoatRoughness: 0.03 });
+  const geoJanela = new THREE.PlaneGeometry(1, 0.3);
+  ordem.forEach((s, i) => {
+    const total = s[6] + s[7];
+    const altura = 1.4 + (total / maxQ) * 13.5;
+    const largura = 2.6 + (s[5] / 12000) * 1.4;
+    const vidroAlt = 0.35 + (s[8] / maxA) * 4.2;
+    const predio = new THREE.Group();
+    const corpo = new THREE.Mesh(new THREE.BoxGeometry(largura, altura, largura), matPredio);
+    corpo.position.y = 0.6 + altura / 2; corpo.castShadow = true; corpo.receiveShadow = true; corpo.userData = { s };
+    predio.add(corpo);
+    for (let y = 1.2; y < altura - 0.3; y += 0.85) {
+      for (let lado = 0; lado < 4; lado++) {
+        const janela = new THREE.Mesh(geoJanela, matJanela);
+        janela.scale.x = largura * 0.78;
+        janela.position.set(0, 0.6 + y, largura / 2 + 0.006);
+        const piv = new THREE.Group(); piv.rotation.y = (lado * Math.PI) / 2; piv.add(janela); predio.add(piv);
+      }
+    }
+    const coroa = new THREE.Mesh(new THREE.BoxGeometry(largura * 0.72, vidroAlt, largura * 0.72), matVidro);
+    coroa.position.y = 0.6 + altura + vidroAlt / 2; coroa.castShadow = true; coroa.userData = { s };
+    predio.add(coroa);
+    const [vx, vz] = vagas[i];
+    predio.position.set(vx * 6.4, 0, vz * 6.4);
+    predio.rotation.y = ((i % 3) - 1) * 0.04;
+    cena.add(predio);
+    torres.push(corpo, coroa);
+  });
+
+  // Árvores de maquete nos espaços livres
+  const matArvore = new THREE.MeshStandardMaterial({ roughness: 0.9 });
+  const geoArvore = new THREE.SphereGeometry(0.55, 20, 14);
+  let semente = 7;
+  const aleatorio = () => ((semente = (semente * 16807) % 2147483647) / 2147483647);
+  for (let k = 0; k < 160; k++) {
+    const x = (aleatorio() - 0.5) * 31, z = (aleatorio() - 0.5) * 31;
+    if (ruaX.some((r) => Math.abs(x - r) < 0.7) || ruaZ.some((r) => Math.abs(z - r) < 0.7)) continue; // em cima de rua
+    const cx = Math.round(x / 6.4), cz = Math.floor(z / 6.4) + 0.5;
+    const ocupada = vagas.slice(0, ordem.length).some(([vx, vz]) => vx === cx && vz === cz);
+    if (ocupada && Math.abs(x - cx * 6.4) < 2.7 && Math.abs(z - cz * 6.4) < 2.7) continue; // dentro do lote do prédio
+    const arvore = new THREE.Mesh(geoArvore, matArvore);
+    const esc = 0.55 + aleatorio() * 0.55;
+    arvore.scale.set(esc, esc * 1.15, esc); arvore.position.set(x, 0.6 + 0.55 * esc * 1.15, z);
+    arvore.castShadow = true; arvore.receiveShadow = true; cena.add(arvore);
+  }
+
+  function aplicarTema() {
+    const escuro = getComputedStyle(document.documentElement).colorScheme === "dark";
+    cena.background = cor("--recuo");
+    cena.fog = new THREE.Fog(cena.background, 80, 160);
+    mesa.material.color = cor("--recuo");
+    base.material.color = cor("--superficie");
+    matRua.color = cor("--linha");
+    matPredio.color = escuro ? hex(0x3a423d) : hex(0xe6dfd0);
+    matJanela.color = escuro ? hex(0xe8c27a) : hex(0xa9bdb5);
+    matJanela.emissive = escuro ? hex(0xd9a441) : hex(0x000000);
+    matJanela.emissiveIntensity = escuro ? 0.7 : 0;
+    matVidro.color = escuro ? hex(0x57c2a0) : hex(0x3f9c7f);
+    matVidro.attenuationColor = cor("--acento");
+    matArvore.color = escuro ? hex(0x2f5b49) : hex(0x6e957a);
+    // O reflexo do estúdio fica baixo para o sol desenhar sombras fortes, como numa foto de maquete com luz de janela.
+    for (const m of [mesa.material, base.material, matRua, matPredio, matArvore]) m.envMapIntensity = escuro ? 0.18 : 0.32;
+    matJanela.envMapIntensity = 1.1;
+    matVidro.envMapIntensity = 1.2;
+    sol.intensity = escuro ? 2.2 : 4.6;
+    ceu.intensity = escuro ? 0.12 : 0.28;
+    renderer.toneMappingExposure = escuro ? 0.9 : 0.82;
+    pedirQuadro();
+  }
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", aplicarTema);
+  new MutationObserver(aplicarTema).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+  function medir() {
+    const w = caixa.clientWidth, h = caixa.clientHeight;
+    if (!w || !h) return;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h; camera.updateProjectionMatrix();
+    pedirQuadro();
+  }
+  new ResizeObserver(medir).observe(caixa);
+
+  // Arrastar gira a maquete; parada, ela gira devagar sozinha
+  let giro = 0.75, inclinacao = 0.48, arrastando = false, ultimoX = 0, ultimoY = 0, ocioso = 0;
+  tela.addEventListener("pointerdown", (e) => { arrastando = true; ultimoX = e.clientX; ultimoY = e.clientY; tela.setPointerCapture(e.pointerId); tela.style.cursor = "grabbing"; });
+  tela.addEventListener("pointerup", () => { arrastando = false; ocioso = 0; tela.style.cursor = "grab"; });
+  const raio = new THREE.Raycaster(), ponteiro = new THREE.Vector2();
+  tela.addEventListener("pointermove", (e) => {
+    const r = tela.getBoundingClientRect();
+    if (arrastando) {
+      giro -= (e.clientX - ultimoX) * 0.006;
+      inclinacao = Math.min(1.25, Math.max(0.28, inclinacao + (e.clientY - ultimoY) * 0.004));
+      ultimoX = e.clientX; ultimoY = e.clientY; pedirQuadro();
+    }
+    ponteiro.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+    raio.setFromCamera(ponteiro, camera);
+    const achou = raio.intersectObjects(torres, false)[0];
+    if (achou) {
+      const s = achou.object.userData.s;
+      etiqueta.innerHTML = `${s[0]} · <b>${milhar(s[6] + s[7])}</b> qualificados · <b>${s[8]}</b> prioridade A`;
+      etiqueta.style.left = e.clientX - r.left + "px"; etiqueta.style.top = e.clientY - r.top + "px";
+      etiqueta.hidden = false;
+    } else etiqueta.hidden = true;
+  });
+  tela.addEventListener("pointerleave", () => { etiqueta.hidden = true; });
+
+  let visivel = true, agendado = false;
+  new IntersectionObserver(([e]) => { visivel = e.isIntersecting; if (visivel) pedirQuadro(); }).observe(caixa);
+  function pedirQuadro() { if (!agendado) { agendado = true; requestAnimationFrame(quadro); } }
+  function quadro() {
+    agendado = false;
+    if (!arrastando && !parado) { ocioso++; if (ocioso > 60) giro += 0.0016; }
+    const d = 64;
+    camera.position.set(Math.cos(giro) * Math.cos(inclinacao) * d, Math.sin(inclinacao) * d, Math.sin(giro) * Math.cos(inclinacao) * d);
+    camera.lookAt(0, 5, 0);
+    renderer.render(cena, camera);
+    if (visivel && !parado) pedirQuadro();
+  }
+  aplicarTema();
+  medir();
+})();
+</script>
+
+</body>
+</html>
